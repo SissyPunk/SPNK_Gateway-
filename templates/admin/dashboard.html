@@ -3,76 +3,114 @@
 {% block title %}SPNK Admin - Dashboard{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-12 mb-4">
-        <h1 class="glitch-text-small" data-text="Admin Dashboard">Admin Dashboard</h1>
-        <p class="text-muted">Welcome to the SPNK administration panel</p>
-    </div>
+<div class="mb-4">
+    <h1 class="glitch-text-small" data-text="Admin Dashboard">Admin Dashboard</h1>
+    <p class="text-muted">Welcome to the SPNK admin portal. Manage NFTs, characters, and events from this control center.</p>
 </div>
 
-<div class="row g-4">
+<div class="row">
     <div class="col-md-4">
-        <div class="card admin-card">
+        <div class="card admin-card mb-4">
             <div class="card-body text-center">
                 <div class="card-icon mb-3">
                     <i class="fas fa-images"></i>
                 </div>
-                <h5 class="card-title">NFTs</h5>
-                <p class="card-text display-4">{{ nft_count }}</p>
+                <h3 class="h4 mb-2">NFTs</h3>
+                <p class="display-4 mb-1">{{ nft_count }}</p>
+                <p class="text-muted mb-3">Total NFTs in collection</p>
                 <a href="{{ url_for('admin_nfts') }}" class="btn btn-outline-neon btn-sm">
-                    <i class="fas fa-cog me-1"></i> Manage
+                    <i class="fas fa-cog me-1"></i> Manage NFTs
                 </a>
             </div>
         </div>
     </div>
+    
     <div class="col-md-4">
-        <div class="card admin-card">
+        <div class="card admin-card mb-4">
             <div class="card-body text-center">
                 <div class="card-icon mb-3">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-user-circle"></i>
                 </div>
-                <h5 class="card-title">Characters</h5>
-                <p class="card-text display-4">{{ character_count }}</p>
-                <a href="#" class="btn btn-outline-neon btn-sm disabled">
-                    <i class="fas fa-cog me-1"></i> Manage
+                <h3 class="h4 mb-2">Characters</h3>
+                <p class="display-4 mb-1">{{ character_count }}</p>
+                <p class="text-muted mb-3">Total character profiles</p>
+                <a href="#" class="btn btn-outline-neon btn-sm">
+                    <i class="fas fa-cog me-1"></i> Manage Characters
                 </a>
             </div>
         </div>
     </div>
+    
     <div class="col-md-4">
-        <div class="card admin-card">
+        <div class="card admin-card mb-4">
             <div class="card-body text-center">
                 <div class="card-icon mb-3">
-                    <i class="fas fa-calendar"></i>
+                    <i class="fas fa-calendar-alt"></i>
                 </div>
-                <h5 class="card-title">Events</h5>
-                <p class="card-text display-4">{{ event_count }}</p>
-                <a href="#" class="btn btn-outline-neon btn-sm disabled">
-                    <i class="fas fa-cog me-1"></i> Manage
+                <h3 class="h4 mb-2">Events</h3>
+                <p class="display-4 mb-1">{{ event_count }}</p>
+                <p class="text-muted mb-3">Timeline events</p>
+                <a href="#" class="btn btn-outline-neon btn-sm">
+                    <i class="fas fa-cog me-1"></i> Manage Events
                 </a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row mt-5">
-    <div class="col-12">
-        <div class="card admin-card">
+<div class="row">
+    <div class="col-md-6">
+        <div class="card admin-card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Recent Activity</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item bg-transparent text-light border-bottom border-pink-50">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">NFT Collection Updated</h6>
+                            <small class="text-muted">Today</small>
+                        </div>
+                        <p class="mb-1 small">Added initial NFT collection with 3 items.</p>
+                    </div>
+                    <div class="list-group-item bg-transparent text-light border-bottom border-pink-50">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Character Profiles Created</h6>
+                            <small class="text-muted">Yesterday</small>
+                        </div>
+                        <p class="mb-1 small">Added character profiles for the Signal Cult members.</p>
+                    </div>
+                    <div class="list-group-item bg-transparent text-light">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Admin Portal Launched</h6>
+                            <small class="text-muted">3 days ago</small>
+                        </div>
+                        <p class="mb-1 small">Initial setup of the SPNK admin management system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card admin-card mb-4">
             <div class="card-header">
                 <h5 class="mb-0">Quick Actions</h5>
             </div>
             <div class="card-body">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <a href="{{ url_for('admin_nfts') }}" class="btn btn-outline-neon btn-sm d-block">
-                            <i class="fas fa-list me-1"></i> View NFT Collection
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <a href="{{ url_for('new_nft') }}" class="btn btn-outline-neon btn-sm d-block">
-                            <i class="fas fa-plus me-1"></i> Add New NFT
-                        </a>
-                    </div>
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('new_nft') }}" class="btn btn-outline-neon">
+                        <i class="fas fa-plus me-2"></i> Add New NFT
+                    </a>
+                    <a href="#" class="btn btn-outline-neon disabled">
+                        <i class="fas fa-plus me-2"></i> Add New Character
+                    </a>
+                    <a href="#" class="btn btn-outline-neon disabled">
+                        <i class="fas fa-plus me-2"></i> Add New Event
+                    </a>
+                    <a href="#" class="btn btn-outline-neon disabled">
+                        <i class="fas fa-cog me-2"></i> Site Settings
+                    </a>
                 </div>
             </div>
         </div>

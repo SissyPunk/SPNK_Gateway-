@@ -197,6 +197,9 @@ def events():
 # Admin routes
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('admin_dashboard'))
+        
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -208,7 +211,7 @@ def login():
             next_page = request.args.get('next')
             return redirect(next_page or url_for('admin_dashboard'))
         
-        flash('Invalid username or password', 'error')
+        flash('Invalid username or password', 'danger')
     
     return render_template('admin/login.html')
 
