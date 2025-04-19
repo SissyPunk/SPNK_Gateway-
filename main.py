@@ -18,15 +18,9 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "spnk_development_key")
 
-# Configure database
-if 'SQLALCHEMY_DATABASE_URI' in os.environ:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+#
     "pool_recycle": 300,
     "pool_pre_ping": True,
-}
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 # Configure file uploads
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload size
