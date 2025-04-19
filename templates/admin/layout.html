@@ -42,8 +42,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if '/admin/nfts' in request.path %}active{% endif %}" href="{{ url_for('admin_nfts') }}">
+                        <a class="nav-link {% if '/admin/nfts' in request.path and '/admin/convert' not in request.path %}active{% endif %}" href="{{ url_for('admin_nfts') }}">
                             <i class="fas fa-images me-1"></i> NFTs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/admin/convert-image' in request.path %}active{% endif %}" href="{{ url_for('convert_image') }}">
+                            <i class="fas fa-bolt me-1"></i> Signal Converter
                         </a>
                     </li>
                 </ul>

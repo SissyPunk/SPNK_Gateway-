@@ -16,7 +16,9 @@
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="id" class="form-label">NFT ID (used for SVG file name)</label>
-                        <input type="text" class="form-control" id="id" name="id" required placeholder="e.g., new_nft_001">
+                        <input type="text" class="form-control" id="id" name="id" required 
+                               value="{{ request.args.get('suggested_id', '') }}" 
+                               placeholder="e.g., new_nft_001">
                         <small class="form-text text-muted">This will be used as the filename for the SVG image (new_nft_001.svg)</small>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 import os
 import shutil
 import uuid
+from datetime import datetime
 from flask import Flask, render_template, url_for, request, redirect, flash, jsonify, session, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -38,6 +39,13 @@ login_manager.login_view = 'login'
 
 # Initialize CSRF protection
 csrf = CSRFProtect(app)
+
+# Add global template functions
+@app.context_processor
+def utility_processor():
+    return {
+        'now': datetime.now
+    }
 
 # Setup Flask-Login
 @login_manager.user_loader
