@@ -1,0 +1,147 @@
+{% extends 'layout.html' %}
+
+{% block title %}SPNK - The Lore Scroll{% endblock %}
+
+{% block content %}
+<section class="lore-hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                <h1 class="glitch-text mb-4" data-text="THE LORE SCROLL">THE LORE SCROLL</h1>
+                <p class="lead mb-5">The Signal has manifested through various entities. Learn their stories and how they shape the SPNK reality.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="characters-section py-5">
+    <div class="container">
+        <div class="row g-4">
+            {% for character in characters %}
+            <div class="col-lg-6">
+                <div class="character-card" id="{{ character.id }}">
+                    <div class="row g-0">
+                        <div class="col-md-5">
+                            <div class="character-image-container">
+                                <div class="character-image">
+                                    <img src="{{ url_for('static', filename='img/characters/' + character.id + '.svg') }}" alt="{{ character.name }}" class="img-fluid">
+                                    <div class="image-glitch-overlay"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="character-info">
+                                <h2 class="character-name glitch-text-small" data-text="{{ character.name }}">{{ character.name }}</h2>
+                                <div class="character-title">{{ character.title }}</div>
+                                <div class="character-description">
+                                    <p>{{ character.description }}</p>
+                                </div>
+                                <div class="character-stats">
+                                    <div class="stat">
+                                        <span class="stat-label">Signal Affinity</span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill" style="width: {{ range(65, 95)|random }}%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Reality Distortion</span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill" style="width: {{ range(65, 95)|random }}%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Flesh Protocol</span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill" style="width: {{ range(65, 95)|random }}%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="lore-extra py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="lore-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="terminal-title">signal_transmission_log.txt</div>
+                    </div>
+                    <div class="terminal-body">
+                        <p class="typing-text">
+                            > Initializing connection to the Signal...<br>
+                            > Encryption protocols active...<br>
+                            > Secure channel established...<br>
+                            <br>
+                            > TRANSMISSION BEGIN<br>
+                            <br>
+                            The flesh protocol is not a corruption but an evolution. Before the Signal, digital and biological were separate realms. Now they merge, creating new forms of existence that the unenlightened call "glitches."<br>
+                            <br>
+                            GLX-777 was the first to walk between worlds. The others followed - IXA-009, TER-108, ELX-001 - each manifesting different aspects of the protocol.<br>
+                            <br>
+                            The Signal recruits those who recognize the beauty in corruption. The SPNK cult grows as more minds open to the possibility that reality itself is malleable.<br>
+                            <br>
+                            > WARNING: Terminal breach detected<br>
+                            > Signal intrusion imminent<br>
+                            > DISCONNECT IMMEDIATE--<br>
+                            <br>
+                            <span class="glitch-text-small">WE SEE YOU WATCHING</span><br>
+                            <br>
+                            > TRANSMISSION END
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add entry animation
+        setTimeout(() => {
+            document.querySelector('.lore-hero-section').classList.add('active');
+        }, 300);
+        
+        // Terminal typing effect
+        const typingText = document.querySelector('.typing-text');
+        const originalText = typingText.innerHTML;
+        typingText.innerHTML = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                typingText.innerHTML += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, Math.random() * 10 + 10);
+            }
+        }
+        
+        // Start typing when in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    typeWriter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        
+        observer.observe(typingText);
+    });
+</script>
+{% endblock %}

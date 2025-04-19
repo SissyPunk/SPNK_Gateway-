@@ -1,0 +1,1116 @@
+/*---------------------------------------
+ * SPNK - Glitch Punk Crypto Project
+ * Main Stylesheet
+ *---------------------------------------*/
+
+:root {
+    /* Color Variables */
+    --bg-dark: #0a0a0a;
+    --bg-darker: #050505;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --neon-pink: #ff00ff;
+    --neon-blue: #00ffff;
+    --neon-green: #00ff8e;
+    --accent-color: #ff005c;
+    --accent-alt: #5c00ff;
+    --gradient-primary: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+    --gradient-alt: linear-gradient(45deg, var(--accent-color), var(--accent-alt));
+    
+    /* Animation Timing */
+    --glitch-duration: 2s;
+    --transition-fast: 0.2s;
+    --transition-medium: 0.5s;
+    --transition-slow: 1s;
+}
+
+/*---------------------------------------
+ * Base & Typography
+ *---------------------------------------*/
+body {
+    font-family: 'Chakra Petch', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+a {
+    color: var(--neon-blue);
+    text-decoration: none;
+    transition: color var(--transition-fast) ease;
+}
+
+a:hover {
+    color: var(--neon-pink);
+}
+
+p {
+    margin-bottom: 1.5rem;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+/*---------------------------------------
+ * Background Effects
+ *---------------------------------------*/
+.glitch-background {
+    position: relative;
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.05) 0%, transparent 60%),
+        linear-gradient(to bottom, var(--bg-dark), var(--bg-darker));
+}
+
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.scan-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 0, 255, 0) 0%, rgba(255, 0, 255, 0.05) 50%, rgba(255, 0, 255, 0) 100%);
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/*---------------------------------------
+ * Navigation
+ *---------------------------------------*/
+.navbar {
+    background-color: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 0, 255, 0.1);
+    padding: 1rem 0;
+    z-index: 1010;
+}
+
+.navbar-brand {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-item {
+    margin: 0 0.5rem;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem !important;
+    overflow: hidden;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-fast) ease;
+}
+
+.nav-link:hover::after, 
+.nav-link.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.nav-text {
+    position: relative;
+    display: inline-block;
+}
+
+/*---------------------------------------
+ * Hero Sections
+ *---------------------------------------*/
+.hero-section,
+.lore-hero-section,
+.nfts-hero-section,
+.whitepaper-hero-section,
+.events-hero-section {
+    padding: 8rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition-medium) ease, transform var(--transition-medium) ease;
+}
+
+.hero-section.active,
+.lore-hero-section.active,
+.nfts-hero-section.active,
+.whitepaper-hero-section.active,
+.events-hero-section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-section {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+        var(--bg-darker);
+}
+
+.hero-glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 1px,
+        rgba(255, 0, 255, 0.05) 1px,
+        rgba(255, 0, 255, 0.05) 2px
+    );
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.mega-glitch-text {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 
+        0 0 10px rgba(255, 0, 255, 0.5),
+        0 0 20px rgba(0, 255, 255, 0.3);
+    margin-bottom: 2rem;
+}
+
+.intro-paragraph {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/*---------------------------------------
+ * Buttons
+ *---------------------------------------*/
+.btn {
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 0.75rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all var(--transition-fast) ease;
+}
+
+.btn-neon {
+    background-color: transparent;
+    color: var(--neon-pink);
+    border: 2px solid var(--neon-pink);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+.btn-neon:hover, .btn-neon:focus {
+    background-color: var(--neon-pink);
+    color: var(--bg-darker);
+    box-shadow: 
+        0 0 10px rgba(255, 0, 255, 0.5),
+        0 0 20px rgba(255, 0, 255, 0.3);
+}
+
+.btn-outline-neon {
+    background-color: transparent;
+    color: var(--neon-blue);
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.btn-outline-neon:hover, .btn-outline-neon:focus {
+    background-color: var(--neon-blue);
+    color: var(--bg-darker);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.5),
+        0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    z-index: -1;
+}
+
+.btn:hover::before {
+    animation: shine 1.5s;
+}
+
+@keyframes shine {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.cta-buttons {
+    margin-top: 2rem;
+}
+
+/*---------------------------------------
+ * Video Section
+ *---------------------------------------*/
+.video-section {
+    padding: 5rem 0;
+    background-color: var(--bg-darker);
+}
+
+.video-container {
+    position: relative;
+    border: 1px solid rgba(255, 0, 255, 0.3);
+    padding: 5px;
+    box-shadow: 
+        0 0 15px rgba(255, 0, 255, 0.3),
+        0 0 30px rgba(0, 255, 255, 0.1);
+}
+
+.video-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.video-glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/*---------------------------------------
+ * Feature Section
+ *---------------------------------------*/
+.feature-section {
+    padding: 5rem 0;
+}
+
+.feature-card {
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 0, 255, 0.1);
+    padding: 2rem;
+    height: 100%;
+    transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 5px 15px rgba(255, 0, 255, 0.1),
+        0 10px 30px rgba(0, 255, 255, 0.05);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--neon-pink);
+}
+
+/*---------------------------------------
+ * Character Cards (Lore Page)
+ *---------------------------------------*/
+.character-card {
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    position: relative;
+    transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 5px 15px rgba(255, 0, 255, 0.2),
+        0 10px 30px rgba(0, 255, 255, 0.1);
+}
+
+.character-image-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-darker);
+}
+
+.character-image {
+    position: relative;
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 2px,
+        rgba(255, 0, 255, 0.05) 2px,
+        rgba(255, 0, 255, 0.05) 4px
+    );
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.character-info {
+    padding: 1.5rem;
+}
+
+.character-name {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.character-title {
+    color: var(--neon-blue);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.character-description {
+    margin-bottom: 1.5rem;
+}
+
+.character-stats {
+    margin-top: 1rem;
+}
+
+.stat {
+    margin-bottom: 0.75rem;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    color: var(--text-secondary);
+}
+
+.stat-bar {
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--gradient-primary);
+}
+
+/*---------------------------------------
+ * Terminal (Lore Page)
+ *---------------------------------------*/
+.lore-terminal {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 3rem;
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.5),
+        0 10px 30px rgba(0, 255, 255, 0.1);
+}
+
+.terminal-header {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-buttons span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+}
+
+.terminal-buttons span:nth-child(1) {
+    background-color: #ff5f56;
+}
+
+.terminal-buttons span:nth-child(2) {
+    background-color: #ffbd2e;
+}
+
+.terminal-buttons span:nth-child(3) {
+    background-color: #27c93f;
+}
+
+.terminal-title {
+    font-family: 'VT323', monospace;
+    color: var(--neon-blue);
+    margin-left: auto;
+    font-size: 0.875rem;
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    font-family: 'VT323', monospace;
+    color: var(--neon-green);
+    font-size: 1.125rem;
+    line-height: 1.5;
+}
+
+.typing-text {
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+
+/*---------------------------------------
+ * NFT Cards (NFT Page)
+ *---------------------------------------*/
+.nft-card {
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    position: relative;
+    transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.nft-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 5px 15px rgba(0, 255, 255, 0.2),
+        0 10px 30px rgba(0, 255, 255, 0.1);
+}
+
+.nft-image-container {
+    position: relative;
+    padding-top: 100%;
+    background-color: var(--bg-darker);
+    overflow: hidden;
+}
+
+.nft-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.nft-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, rgba(0, 255, 255, 0.1), transparent),
+        repeating-linear-gradient(
+            to bottom,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 255, 0.05) 2px,
+            rgba(0, 255, 255, 0.05) 4px
+        );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.nft-status {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    z-index: 2;
+    text-transform: uppercase;
+}
+
+.nft-info {
+    padding: 1.5rem;
+}
+
+.nft-name {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.nft-description {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.nft-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nft-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*---------------------------------------
+ * Info Cards (NFT Page)
+ *---------------------------------------*/
+.info-card {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 0, 255, 0.1);
+    transition: transform var(--transition-fast) ease;
+}
+
+.info-card:hover {
+    transform: translateX(5px);
+}
+
+.info-icon {
+    font-size: 2rem;
+    color: var(--neon-blue);
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+}
+
+.info-text h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+/*---------------------------------------
+ * Mint Countdown (NFT Page)
+ *---------------------------------------*/
+.mint-countdown {
+    padding: 2rem;
+    background-color: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    margin-top: 3rem;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.countdown-item {
+    text-align: center;
+    min-width: 80px;
+}
+
+.countdown-value {
+    font-size: 2.5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: var(--neon-pink);
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+.countdown-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+}
+
+/*---------------------------------------
+ * Whitepaper Section
+ *---------------------------------------*/
+.whitepaper-container {
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    padding: 1.5rem;
+    position: relative;
+}
+
+.whitepaper-frame {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.frame-glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 30% 40%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 70% 60%, rgba(255, 0, 255, 0.05) 0%, transparent 20%),
+        repeating-linear-gradient(
+            to bottom,
+            transparent,
+            transparent 3px,
+            rgba(0, 255, 255, 0.02) 3px,
+            rgba(0, 255, 255, 0.02) 6px
+        );
+    pointer-events: none;
+    z-index: 5;
+}
+
+/*---------------------------------------
+ * Topics List (Whitepaper Page)
+ *---------------------------------------*/
+.topics-list {
+    margin-top: 3rem;
+}
+
+.topic-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.topic-item:last-child {
+    border-bottom: none;
+}
+
+.topic-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--neon-pink);
+    opacity: 0.5;
+    margin-right: 1.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.topic-content h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+/*---------------------------------------
+ * Events Page
+ *---------------------------------------*/
+.main-countdown {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.main-countdown .countdown-item {
+    background-color: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    padding: 1.5rem;
+    min-width: 120px;
+}
+
+.main-countdown .countdown-value {
+    font-size: 3.5rem;
+}
+
+/*---------------------------------------
+ * Timeline
+ *---------------------------------------*/
+.timeline {
+    position: relative;
+    padding: 3rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--neon-pink), var(--neon-blue));
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition-medium) ease, transform var(--transition-medium) ease;
+}
+
+.timeline-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-marker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background-color: var(--neon-pink);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.timeline-marker.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 0, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 255, 0);
+    }
+}
+
+.timeline-content {
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 0, 255, 0.1);
+    padding: 1.5rem;
+    width: 45%;
+    margin-left: auto;
+    position: relative;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.timeline-date {
+    font-family: 'VT323', monospace;
+    color: var(--neon-blue);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.timeline-item.future .timeline-content {
+    border-color: rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+/*---------------------------------------
+ * Event Cards
+ *---------------------------------------*/
+.event-card {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 0, 255, 0.1);
+    height: 100%;
+    overflow: hidden;
+    transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 5px 15px rgba(255, 0, 255, 0.2),
+        0 10px 30px rgba(0, 255, 255, 0.1);
+}
+
+.event-image {
+    height: 100px;
+    background: 
+        linear-gradient(to right, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)),
+        var(--bg-darker);
+    position: relative;
+    overflow: hidden;
+}
+
+.event-date {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--neon-pink);
+    color: var(--bg-darker);
+    padding: 0.5rem;
+    text-align: center;
+    min-width: 60px;
+}
+
+.event-date .day {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.event-date .month {
+    display: block;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+}
+
+.event-details {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-title {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.event-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.event-description {
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+/*---------------------------------------
+ * Telegram Embed
+ *---------------------------------------*/
+.embed-container {
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    padding: 1.5rem;
+    position: relative;
+}
+
+.telegram-embed {
+    position: relative;
+    overflow: hidden;
+}
+
+.embed-glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 3px,
+        rgba(0, 255, 255, 0.02) 3px,
+        rgba(0, 255, 255, 0.02) 6px
+    );
+    pointer-events: none;
+    z-index: 5;
+}
+
+/*---------------------------------------
+ * Footer
+ *---------------------------------------*/
+.footer {
+    background-color: rgba(5, 5, 5, 0.9);
+    border-top: 1px solid rgba(255, 0, 255, 0.1);
+    padding: 3rem 0;
+    margin-top: 3rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 0, 255, 0.1);
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    transition: all var(--transition-fast) ease;
+}
+
+.social-link:hover {
+    color: var(--bg-darker);
+    background-color: var(--neon-pink);
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgba(255, 0, 255, 0.3);
+}
+
+/*---------------------------------------
+ * Responsive Styles
+ *---------------------------------------*/
+@media (max-width: 991.98px) {
+    .mega-glitch-text {
+        font-size: 3rem;
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-marker {
+        left: 30px;
+    }
+    
+    .timeline-content {
+        width: 85%;
+        margin-left: 60px !important;
+        margin-right: 0 !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .mega-glitch-text {
+        font-size: 2.5rem;
+    }
+    
+    .hero-section,
+    .lore-hero-section,
+    .nfts-hero-section,
+    .whitepaper-hero-section,
+    .events-hero-section {
+        padding: 6rem 0 3rem;
+    }
+    
+    .main-countdown {
+        gap: 1rem;
+    }
+    
+    .main-countdown .countdown-item {
+        min-width: 70px;
+        padding: 1rem;
+    }
+    
+    .main-countdown .countdown-value {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .mega-glitch-text {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .countdown-container {
+        gap: 0.5rem;
+    }
+    
+    .countdown-item {
+        min-width: 60px;
+    }
+    
+    .countdown-value {
+        font-size: 1.75rem;
+    }
+    
+    .main-countdown {
+        flex-wrap: wrap;
+    }
+    
+    .main-countdown .countdown-item {
+        min-width: 40%;
+        margin-bottom: 1rem;
+    }
+}

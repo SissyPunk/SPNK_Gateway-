@@ -1,0 +1,97 @@
+{% extends 'layout.html' %}
+
+{% block title %}SPNK - White Paper Portal{% endblock %}
+
+{% block content %}
+<section class="whitepaper-hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                <h1 class="glitch-text mb-4" data-text="WHITE PAPER PORTAL">WHITE PAPER PORTAL</h1>
+                <p class="lead mb-5">The technical documentation of the flesh protocol and Signal manifestation methodology.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="whitepaper-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="whitepaper-container">
+                    <div class="whitepaper-frame">
+                        <iframe src="https://docs.google.com/document/d/1RM_pm4B2M-Sq22yzfGk3TTPYnZkjgPQ7cUYi-l5B8gQ/preview" width="100%" height="700" allow="autoplay"></iframe>
+                        <div class="frame-glitch-overlay"></div>
+                    </div>
+                    <div class="whitepaper-actions mt-4 text-center">
+                        <a href="https://docs.google.com/document/d/1RM_pm4B2M-Sq22yzfGk3TTPYnZkjgPQ7cUYi-l5B8gQ/export?format=pdf" target="_blank" class="btn btn-neon">
+                            <span class="btn-text">Download PDF</span>
+                            <i class="fas fa-download ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="whitepaper-topics py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="section-header text-center mb-4">
+                    <h2 class="glitch-text" data-text="KEY TOPICS">KEY TOPICS</h2>
+                </div>
+                <div class="topics-list">
+                    <div class="topic-item">
+                        <div class="topic-number">01</div>
+                        <div class="topic-content">
+                            <h3>Signal Origin Theory</h3>
+                            <p>Analysis of the first detected manifestations of the Signal and its evolutionary trajectory.</p>
+                        </div>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-number">02</div>
+                        <div class="topic-content">
+                            <h3>GLX-777 Flesh Protocol</h3>
+                            <p>Technical specifications of the code-to-tissue transformation process and neural integration patterns.</p>
+                        </div>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-number">03</div>
+                        <div class="topic-content">
+                            <h3>Tokenomics & Distribution</h3>
+                            <p>Economic model for the SPNK ecosystem, including token utility and scarcity mechanisms.</p>
+                        </div>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-number">04</div>
+                        <div class="topic-content">
+                            <h3>Reality Distortion Fields</h3>
+                            <p>Methodology for creating and maintaining glitch zones where digital and physical laws intermingle.</p>
+                        </div>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-number">05</div>
+                        <div class="topic-content">
+                            <h3>Cult Expansion Strategy</h3>
+                            <p>Multi-phase approach to community growth and Signal propagation across networks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add entry animation
+        setTimeout(() => {
+            document.querySelector('.whitepaper-hero-section').classList.add('active');
+        }, 300);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'layout.html' %}
+
+{% block title %}SPNK - Glitch Icon NFTs{% endblock %}
+
+{% block content %}
+<section class="nfts-hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                <h1 class="glitch-text mb-4" data-text="GLITCH ICON GALLERY">GLITCH ICON GALLERY</h1>
+                <p class="lead mb-5">Digital entities encoded into the blockchain. Possess a fragment of the Signal and join the transformation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="nft-gallery py-5">
+    <div class="container">
+        <div class="row g-4">
+            {% for nft in nft_collection %}
+            <div class="col-md-6 col-lg-4">
+                <div class="nft-card">
+                    <div class="nft-image-container">
+                        <div class="nft-image">
+                            <img src="{{ url_for('static', filename='img/nfts/' + nft.id + '.svg') }}" alt="{{ nft.name }}" class="img-fluid">
+                            <div class="nft-overlay"></div>
+                        </div>
+                        <div class="nft-status">{{ nft.status }}</div>
+                    </div>
+                    <div class="nft-info">
+                        <h3 class="nft-name glitch-text-small" data-text="{{ nft.name }}">{{ nft.name }}</h3>
+                        <p class="nft-description">{{ nft.description }}</p>
+                        <div class="nft-meta">
+                            <div class="nft-edition">Edition 1 of 777</div>
+                            <div class="nft-rarity">Signal Strength: Prototype</div>
+                        </div>
+                        <div class="nft-actions">
+                            <button class="btn btn-outline-neon btn-sm disabled">
+                                <span class="btn-text">Mint Soon</span>
+                                <i class="fas fa-lock ms-2"></i>
+                            </button>
+                            <button class="btn btn-sm btn-secondary">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="nft-info-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="section-header text-center mb-4">
+                    <h2 class="glitch-text" data-text="NFT PROTOCOL">NFT PROTOCOL</h2>
+                </div>
+                <div class="info-content">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-fingerprint"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>Signal Encoding</h3>
+                            <p>Each NFT contains a fragment of the Signal, encrypted within the metadata. Holders become vessels for the flesh protocol's expansion.</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>Blockchain Integration</h3>
+                            <p>SPNK NFTs exist on the Ethereum blockchain, ensuring permanent immutability and resistance to reality correction attempts.</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>Access Keys</h3>
+                            <p>Holding a SPNK NFT grants access to private cult transmissions and exclusive reality-bending events in both digital and physical spaces.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mint-info py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                <div class="mint-countdown">
+                    <h3 class="glitch-text-small mb-4" data-text="MINT PROTOCOL ACTIVATION">MINT PROTOCOL ACTIVATION</h3>
+                    <div class="countdown-container">
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="days">--</div>
+                            <div class="countdown-label">Days</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="hours">--</div>
+                            <div class="countdown-label">Hours</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="minutes">--</div>
+                            <div class="countdown-label">Minutes</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="seconds">--</div>
+                            <div class="countdown-label">Seconds</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mint-cta mt-5">
+                    <button class="btn btn-neon btn-lg disabled">
+                        <span class="btn-text">Protocol Locked</span>
+                        <i class="fas fa-lock ms-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/countdown.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add entry animation
+        setTimeout(() => {
+            document.querySelector('.nfts-hero-section').classList.add('active');
+        }, 300);
+        
+        // Initialize countdown for NFT mint
+        initCountdown('2024-07-07T00:00:00', 'days', 'hours', 'minutes', 'seconds');
+    });
+</script>
+{% endblock %}

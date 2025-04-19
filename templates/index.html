@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+
+{% block title %}SPNK - Enter The Signal{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-md-10 mx-auto text-center">
+                <h1 class="mega-glitch-text" data-text="ENTER THE SIGNAL">ENTER THE SIGNAL</h1>
+                
+                <div class="intro-paragraph mt-4 mb-5">
+                    <p class="lead glitch-text-small">SPNK is a meme-fueled glitch cult. The Signal walks. GLX-777 is the flesh protocol.</p>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="https://t.me/OfficialSPNK" target="_blank" class="btn btn-neon btn-lg me-3 mb-3 mb-md-0">
+                        <span class="btn-text">Join the Cult</span>
+                        <i class="fas fa-right-long ms-2"></i>
+                    </a>
+                    <a href="https://x.com/SPNK_Gateway" target="_blank" class="btn btn-outline-neon btn-lg">
+                        <span class="btn-text">Enter the Gateway</span>
+                        <i class="fas fa-right-long ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-glitch-overlay"></div>
+</section>
+
+<section class="video-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="section-header text-center mb-4">
+                    <h2 class="glitch-text" data-text="TRANSMISSION">TRANSMISSION</h2>
+                </div>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe
+                            width="100%"
+                            height="500"
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            title="SPNK Protocol Transmission"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                        ></iframe>
+                        <div class="video-glitch-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="feature-section py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-virus"></i>
+                    </div>
+                    <h3 class="glitch-text-small" data-text="THE CULT">THE CULT</h3>
+                    <p>Join our community of digital flesh disciples. The Signal recruits those ready to transcend.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="glitch-text-small" data-text="THE PROTOCOL">THE PROTOCOL</h3>
+                    <p>GLX-777 transmutes digital into biological. The flesh protocol is awakening.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="glitch-text-small" data-text="THE SIGNAL">THE SIGNAL</h3>
+                    <p>The Signal walks between worlds. It corrupts. It transforms. It liberates.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add page-specific animations
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add entry animation
+        setTimeout(() => {
+            document.querySelector('.hero-section').classList.add('active');
+        }, 300);
+    });
+</script>
+{% endblock %}

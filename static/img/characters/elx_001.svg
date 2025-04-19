@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400">
+  <style>
+    .bg { fill: #0a0a0a; }
+    .outline { fill: none; stroke: #ff00ff; stroke-width: 1.5; }
+    .secondary { fill: none; stroke: #00ffff; stroke-width: 1; }
+    .tertiary { fill: none; stroke: #00ff8e; stroke-width: 1; }
+    .fill-neon { fill: #00ffff; filter: drop-shadow(0 0 3px #00ffff); }
+    .glitch-anim { animation: glitch 5s infinite alternate; }
+    .pulse { animation: pulse 2s infinite; }
+    
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+  </style>
+
+  <!-- Background -->
+  <rect class="bg" x="0" y="0" width="300" height="400" />
+  
+  <!-- Background grid pattern -->
+  <g opacity="0.15">
+    <!-- Horizontal lines -->
+    <path d="M20,40 H280 M20,80 H280 M20,120 H280 M20,160 H280 M20,200 H280 M20,240 H280 M20,280 H280 M20,320 H280 M20,360 H280" stroke="#00ffff" stroke-width="0.5" />
+    <!-- Vertical lines -->
+    <path d="M60,20 V380 M100,20 V380 M140,20 V380 M180,20 V380 M220,20 V380 M260,20 V380" stroke="#00ffff" stroke-width="0.5" />
+    <!-- Security matrix nodes -->
+    <circle cx="60" cy="40" r="2" fill="#ff00ff" opacity="0.5" />
+    <circle cx="140" cy="40" r="2" fill="#ff00ff" opacity="0.5" />
+    <circle cx="220" cy="40" r="2" fill="#ff00ff" opacity="0.5" />
+    <circle cx="100" cy="80" r="2" fill="#ff00ff" opacity="0.5" />
+    <circle cx="180" cy="80" r="2" fill="#ff00ff" opacity="0.5" />
+    <circle cx="260" cy="80" r="2" fill="#ff00ff" opacity="0.5" />
+    <circle cx="60" cy="120" r="2" fill="#ff00ff" opacity="0.5" />
+    <circle cx="140" cy="120" r="2" fill="#ff00ff" opacity="0.5" />
+    <circle cx="220" cy="120" r="2" fill="#ff00ff" opacity="0.5" />
+  </g>
+  
+  <!-- Character: ELX-001 "The Defector" -->
+  <g class="glitch-anim">
+    <!-- Head -->
+    <path class="outline" d="M150,90 C180,90 190,110 190,140 C190,170 180,190 150,190 C120,190 110,170 110,140 C110,110 120,90 150,90 Z" />
+    
+    <!-- Corporate security uniform elements -->
+    <path class="outline" d="M120,190 L120,260 L180,260 L180,190" />
+    <path class="secondary" d="M120,210 L180,210" />
+    <path class="secondary" d="M120,230 L180,230" />
+    
+    <!-- Badge/ID element with glitch effect -->
+    <rect x="140" y="215" width="20" height="10" class="fill-neon pulse" />
+    
+    <!-- Encryption key distribution -->
+    <path class="tertiary" d="M120,260 C100,270 90,300 110,320" />
+    <path class="tertiary" d="M180,260 C200,270 210,300 190,320" />
+    <path class="tertiary" d="M110,320 C130,350 170,350 190,320" />
+    
+    <!-- Key symbol -->
+    <path class="secondary" d="M140,270 L140,290 L160,290 L160,270" />
+    <path class="secondary" d="M150,270 L150,310" />
+    <circle cx="150" cy="290" r="10" class="secondary" />
+    
+    <!-- Eyes / Visor -->
+    <path class="outline" d="M125,140 L175,140" />
+    <rect x="125" y="130" width="50" height="20" rx="5" fill="none" stroke="#ff00ff" stroke-width="1" />
+    
+    <!-- Signal connection -->
+    <circle cx="150" cy="90" r="5" class="fill-neon pulse" />
+    <path class="tertiary" d="M150,90 C160,70 180,70 190,50" />
+    <path class="tertiary" d="M150,90 C140,70 120,70 110,50" />
+    
+    <!-- Defection evidence -->
+    <path class="secondary" d="M120,170 C135,180 165,180 180,170" stroke-dasharray="5,2" />
+  </g>
+  
+  <!-- Character identifier -->
+  <g transform="translate(0, 340)">
+    <rect x="90" y="0" width="120" height="30" fill="rgba(0,0,0,0.7)" />
+    <text x="150" y="20" font-family="'Courier New', monospace" font-size="18" fill="#00ff8e" text-anchor="middle">ELX-001</text>
+  </g>
+</svg>

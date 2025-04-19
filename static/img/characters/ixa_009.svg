@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400">
+  <style>
+    .bg { fill: #0a0a0a; }
+    .outline { fill: none; stroke: #ff00ff; stroke-width: 1.5; }
+    .highlight { fill: none; stroke: #00ffff; stroke-width: 1; }
+    .glow { filter: drop-shadow(0 0 3px #ff00ff); }
+    .glitch-anim { animation: glitch 3s infinite alternate; }
+    
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+  </style>
+
+  <!-- Background -->
+  <rect class="bg" x="0" y="0" width="300" height="400" />
+  
+  <!-- Circuit pattern background -->
+  <g opacity="0.2">
+    <path d="M0,200 H300 M150,0 V400" stroke="#00ffff" stroke-width="0.5" />
+    <path d="M50,50 H250 V350 H50 Z" stroke="#ff00ff" stroke-width="0.5" fill="none" />
+    <circle cx="150" cy="200" r="100" stroke="#ff00ff" stroke-width="0.5" fill="none" />
+  </g>
+  
+  <!-- Character: IXA-009 "Masked Flame" -->
+  <g class="glitch-anim glow">
+    <!-- Head/Mask -->
+    <path class="outline" d="M150,100 C180,100 200,120 200,150 C200,180 180,210 150,230 C120,210 100,180 100,150 C100,120 120,100 150,100 Z" />
+    
+    <!-- Eyes -->
+    <ellipse class="highlight" cx="130" cy="150" rx="15" ry="8" />
+    <ellipse class="highlight" cx="170" cy="150" rx="15" ry="8" />
+    <ellipse fill="#ff00ff" cx="130" cy="150" rx="5" ry="3" />
+    <ellipse fill="#ff00ff" cx="170" cy="150" rx="5" ry="3" />
+    
+    <!-- Mask details -->
+    <path class="outline" d="M120,130 L180,130" />
+    <path class="outline" d="M150,130 L150,170" />
+    <path class="outline" d="M120,170 L180,170" />
+    
+    <!-- Shoulders/Upper body -->
+    <path class="outline" d="M100,230 C100,240 120,270 150,270 C180,270 200,240 200,230" />
+    
+    <!-- Connected nodes/circuits -->
+    <circle cx="110" cy="180" r="5" fill="#ff00ff" />
+    <circle cx="190" cy="180" r="5" fill="#ff00ff" />
+    <path class="highlight" d="M110,180 L90,200 L70,190" />
+    <path class="highlight" d="M190,180 L210,200 L230,190" />
+    
+    <!-- Flame elements -->
+    <path class="highlight" d="M130,270 C140,290 160,290 170,270" />
+    <path class="highlight" d="M140,270 C145,300 155,300 160,270" />
+    <path class="highlight" d="M150,270 V310" />
+  </g>
+  
+  <!-- Character identifier -->
+  <g transform="translate(0, 340)">
+    <rect x="90" y="0" width="120" height="30" fill="rgba(0,0,0,0.7)" />
+    <text x="150" y="20" font-family="'Courier New', monospace" font-size="18" fill="#ff00ff" text-anchor="middle">IXA-009</text>
+  </g>
+</svg>

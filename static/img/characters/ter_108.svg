@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400">
+  <style>
+    .bg { fill: #0a0a0a; }
+    .outline { fill: none; stroke: #5c00ff; stroke-width: 1.5; }
+    .secondary { fill: none; stroke: #00ffff; stroke-width: 1; }
+    .frequency { fill: none; stroke: #ff00ff; stroke-width: 1; }
+    .glow { filter: drop-shadow(0 0 3px #5c00ff); }
+    .glitch-anim { animation: glitch 6s infinite alternate; }
+    .wave-anim { animation: wave 8s infinite linear; }
+    
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+    
+    @keyframes wave {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+
+  <!-- Background -->
+  <rect class="bg" x="0" y="0" width="300" height="400" />
+  
+  <!-- Frequency pattern background -->
+  <g opacity="0.2">
+    <!-- Audio waveform patterns -->
+    <path d="M20,140 C40,110 60,170 80,140 C100,110 120,170 140,140 C160,110 180,170 200,140 C220,110 240,170 260,140 C280,110 300,170 320,140" stroke="#5c00ff" stroke-width="0.5" />
+    <path d="M20,160 C40,130 60,190 80,160 C100,130 120,190 140,160 C160,130 180,190 200,160 C220,130 240,190 260,160 C280,130 300,190 320,160" stroke="#5c00ff" stroke-width="0.5" />
+    <path d="M20,180 C40,150 60,210 80,180 C100,150 120,210 140,180 C160,150 180,210 200,180 C220,150 240,210 260,180 C280,150 300,210 320,180" stroke="#5c00ff" stroke-width="0.5" />
+    
+    <!-- Dimensional bridge -->
+    <path d="M50,240 H250 M50,260 H250 M50,280 H250" stroke="#00ffff" stroke-width="0.5" />
+    <path d="M100,220 V300 M150,220 V300 M200,220 V300" stroke="#00ffff" stroke-width="0.5" />
+  </g>
+  
+  <!-- Character: TER-108 "The Voice Between Realms" -->
+  <g class="glitch-anim glow">
+    <!-- Abstract frequency form (neither digital nor analog) -->
+    <path class="outline" d="M150,80 C190,80 220,110 220,150 C220,190 190,220 150,220 C110,220 80,190 80,150 C80,110 110,80 150,80 Z" />
+    
+    <!-- Voice visualizer -->
+    <path class="frequency wave-anim" d="M100,150 C120,130 130,170 150,150 C170,130 180,170 200,150" />
+    <path class="frequency wave-anim" d="M100,160 C120,140 130,180 150,160 C170,140 180,180 200,160" />
+    <path class="frequency wave-anim" d="M100,140 C120,120 130,160 150,140 C170,120 180,160 200,140" />
+    
+    <!-- Dimensional bridge -->
+    <path class="secondary" d="M150,220 V300" />
+    <path class="secondary" d="M120,260 H180" />
+    <path class="secondary" d="M100,280 H200" />
+    <path class="secondary" d="M80,300 H220" />
+    
+    <!-- Voice transmission nodes -->
+    <circle cx="150" cy="120" r="8" fill="#5c00ff" opacity="0.7" />
+    <circle cx="120" cy="150" r="6" fill="#5c00ff" opacity="0.7" />
+    <circle cx="180" cy="150" r="6" fill="#5c00ff" opacity="0.7" />
+    <circle cx="150" cy="180" r="8" fill="#5c00ff" opacity="0.7" />
+    
+    <!-- Connection lines -->
+    <path class="secondary" d="M150,120 L120,150 L150,180 L180,150 Z" />
+    
+    <!-- Signal emanating -->
+    <path class="outline" d="M90,100 C100,90 110,110 120,100" />
+    <path class="outline" d="M180,100 C190,90 200,110 210,100" />
+    <path class="outline" d="M90,200 C100,190 110,210 120,200" />
+    <path class="outline" d="M180,200 C190,190 200,210 210,200" />
+    
+    <!-- Realm bridge vortex -->
+    <ellipse cx="150" cy="260" rx="20" ry="10" class="secondary" />
+  </g>
+  
+  <!-- Character identifier -->
+  <g transform="translate(0, 340)">
+    <rect x="90" y="0" width="120" height="30" fill="rgba(0,0,0,0.7)" />
+    <text x="150" y="20" font-family="'Courier New', monospace" font-size="18" fill="#5c00ff" text-anchor="middle">TER-108</text>
+  </g>
+</svg>

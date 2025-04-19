@@ -1,0 +1,469 @@
+/*---------------------------------------
+ * SPNK - Glitch Animations & Effects
+ *---------------------------------------*/
+
+/*---------------------------------------
+ * Glitch Text Effects
+ *---------------------------------------*/
+.glitch-text {
+    position: relative;
+    display: inline-block;
+    color: var(--text-primary);
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.glitch-text::before {
+    color: var(--neon-pink);
+    z-index: -1;
+    animation: glitch-animation 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+    color: var(--neon-blue);
+    z-index: -2;
+    animation: glitch-animation 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-animation {
+    0% {
+        clip-path: inset(48% 0 61% 0);
+        transform: translate(-5px, 5px);
+    }
+    5% {
+        clip-path: inset(9% 0 40% 0);
+        transform: translate(5px, -5px);
+    }
+    10% {
+        clip-path: inset(87% 0 3% 0);
+        transform: translate(-5px, 0);
+    }
+    15% {
+        clip-path: inset(16% 0 62% 0);
+        transform: translate(0, -5px);
+    }
+    20% {
+        clip-path: inset(100% 0 1% 0);
+        transform: translate(-5px, 5px);
+    }
+    25% {
+        clip-path: inset(26% 0 67% 0);
+        transform: translate(5px, 0);
+    }
+    30% {
+        clip-path: inset(67% 0 27% 0);
+        transform: translate(0, 5px);
+    }
+    35% {
+        clip-path: inset(31% 0 58% 0);
+        transform: translate(-5px, -5px);
+    }
+    40% {
+        clip-path: inset(38% 0 43% 0);
+        transform: translate(5px, 5px);
+    }
+    45% {
+        clip-path: inset(94% 0 7% 0);
+        transform: translate(-5px, 0);
+    }
+    50% {
+        clip-path: inset(23% 0 68% 0);
+        transform: translate(0, -5px);
+    }
+    55% {
+        clip-path: inset(3% 0 97% 0);
+        transform: translate(5px, 5px);
+    }
+    60% {
+        clip-path: inset(58% 0 43% 0);
+        transform: translate(-5px, 0);
+    }
+    65% {
+        clip-path: inset(100% 0 0% 0);
+        transform: translate(0, 5px);
+    }
+    70% {
+        clip-path: inset(67% 0 33% 0);
+        transform: translate(5px, -5px);
+    }
+    75% {
+        clip-path: inset(23% 0 77% 0);
+        transform: translate(-5px, 5px);
+    }
+    80% {
+        clip-path: inset(47% 0 51% 0);
+        transform: translate(0, -5px);
+    }
+    85% {
+        clip-path: inset(38% 0 60% 0);
+        transform: translate(5px, 0);
+    }
+    90% {
+        clip-path: inset(66% 0 33% 0);
+        transform: translate(-5px, -5px);
+    }
+    95% {
+        clip-path: inset(91% 0 8% 0);
+        transform: translate(5px, 5px);
+    }
+    100% {
+        clip-path: inset(27% 0 71% 0);
+        transform: translate(0, 0);
+    }
+}
+
+/* Smaller glitch effect for secondary text */
+.glitch-text-small {
+    position: relative;
+    display: inline-block;
+    color: var(--text-primary);
+}
+
+.glitch-text-small::before,
+.glitch-text-small::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+}
+
+.glitch-text-small::before {
+    color: var(--neon-pink);
+    z-index: -1;
+    animation: glitch-animation-small 4s infinite linear alternate-reverse;
+}
+
+.glitch-text-small::after {
+    color: var(--neon-blue);
+    z-index: -2;
+    animation: glitch-animation-small 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-animation-small {
+    0% {
+        clip-path: inset(48% 0 61% 0);
+        transform: translate(-1px, 1px);
+    }
+    20% {
+        clip-path: inset(26% 0 67% 0);
+        transform: translate(1px, 0);
+    }
+    40% {
+        clip-path: inset(38% 0 43% 0);
+        transform: translate(1px, 1px);
+    }
+    60% {
+        clip-path: inset(58% 0 43% 0);
+        transform: translate(-1px, 0);
+    }
+    80% {
+        clip-path: inset(47% 0 51% 0);
+        transform: translate(0, -1px);
+    }
+    100% {
+        clip-path: inset(27% 0 71% 0);
+        transform: translate(0, 0);
+    }
+}
+
+/*---------------------------------------
+ * Flicker Animation
+ *---------------------------------------*/
+.flicker-text {
+    animation: flicker 3s linear infinite;
+}
+
+@keyframes flicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 1;
+    }
+    20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.33;
+    }
+}
+
+/*---------------------------------------
+ * CRT Screen Animation
+ *---------------------------------------*/
+.crt-effect {
+    animation: crt-effect 0.1s infinite;
+    position: relative;
+}
+
+@keyframes crt-effect {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(0.5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/*---------------------------------------
+ * VHS Distortion
+ *---------------------------------------*/
+.vhs-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.vhs-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 1px,
+        rgba(255, 255, 255, 0.03) 1px,
+        rgba(255, 255, 255, 0.03) 2px
+    );
+    animation: vhs-tracking 8s infinite linear;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes vhs-tracking {
+    0% {
+        transform: translateY(-30%);
+    }
+    100% {
+        transform: translateY(130%);
+    }
+}
+
+/*---------------------------------------
+ * Distortion Wave
+ *---------------------------------------*/
+.distortion-wave {
+    position: relative;
+    overflow: hidden;
+}
+
+.distortion-wave::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 0, 255, 0.1) 50%,
+        transparent 100%
+    );
+    transform: translateX(-50%);
+    animation: wave-animation 2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes wave-animation {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/*---------------------------------------
+ * Scanline Effect
+ *---------------------------------------*/
+.scanline-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.scanline-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    animation: scanline 2s linear infinite;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(1000%);
+    }
+}
+
+/*---------------------------------------
+ * Digital Noise
+ *---------------------------------------*/
+.digital-noise {
+    position: relative;
+}
+
+.digital-noise::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    animation: noise-change 0.2s infinite;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes noise-change {
+    0% { opacity: 0.05; }
+    50% { opacity: 0.02; }
+    100% { opacity: 0.05; }
+}
+
+/*---------------------------------------
+ * Color Shift
+ *---------------------------------------*/
+.color-shift {
+    animation: color-shift 5s infinite alternate;
+}
+
+@keyframes color-shift {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(30deg);
+    }
+}
+
+/*---------------------------------------
+ * Page Transition
+ *---------------------------------------*/
+.page-content {
+    animation: fade-in 0.5s ease-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*---------------------------------------
+ * Glitchy Hover Effects
+ *---------------------------------------*/
+.glitch-hover {
+    transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.glitch-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 255, 0.1);
+    z-index: -1;
+    transform: translateX(-100%);
+    transition: transform var(--transition-fast) ease;
+}
+
+.glitch-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 255, 0.2);
+}
+
+.glitch-hover:hover::before {
+    transform: translateX(0);
+}
+
+/*---------------------------------------
+ * Loading Animations
+ *---------------------------------------*/
+.loading-signal {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+
+.loading-signal::before,
+.loading-signal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--neon-pink);
+    opacity: 0.7;
+    animation: pulse-out 1.5s ease-in-out infinite;
+}
+
+.loading-signal::after {
+    animation-delay: 0.5s;
+}
+
+@keyframes pulse-out {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/*---------------------------------------
+ * Static Noise
+ *---------------------------------------*/
+.static-noise {
+    position: relative;
+}
+
+.static-noise::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.1;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 1;
+}

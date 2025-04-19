@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    .logo-letter { font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: bold; }
+    .glitch { animation: glitch 2s infinite; }
+    
+    @keyframes glitch {
+      0% { transform: translate(0); fill: #ff00ff; }
+      20% { transform: translate(-2px, 2px); fill: #00ffff; }
+      40% { transform: translate(-2px, -2px); fill: #ff00ff; }
+      60% { transform: translate(2px, 2px); fill: #00ffff; }
+      80% { transform: translate(2px, -2px); fill: #ff00ff; }
+      100% { transform: translate(0); fill: #00ffff; }
+    }
+    
+    .circuit {
+      stroke: #ff00ff;
+      stroke-width: 0.5;
+      fill: none;
+      opacity: 0.7;
+    }
+    
+    .glow {
+      filter: drop-shadow(0 0 5px #ff00ff);
+    }
+  </style>
+  
+  <!-- Background circuit patterns -->
+  <path class="circuit" d="M10,10 L90,10 L90,90 L10,90 Z" />
+  <path class="circuit" d="M20,20 L80,20 L80,80 L20,80 Z" />
+  <path class="circuit" d="M10,10 L40,40 M90,10 L60,40 M10,90 L40,60 M90,90 L60,60" />
+  <path class="circuit" d="M50,10 L50,30 M50,70 L50,90 M10,50 L30,50 M70,50 L90,50" />
+  
+  <!-- Logo text -->
+  <g class="glow">
+    <text x="20" y="45" class="logo-letter glitch">S</text>
+    <text x="35" y="45" class="logo-letter glitch">P</text>
+    <text x="50" y="45" class="logo-letter glitch">N</text>
+    <text x="65" y="45" class="logo-letter glitch">K</text>
+  </g>
+  
+  <!-- Signal symbol -->
+  <g class="glow">
+    <circle cx="50" cy="65" r="10" fill="none" stroke="#00ffff" stroke-width="1.5" />
+    <path d="M40,65 L60,65 M50,55 L50,75" stroke="#ff00ff" stroke-width="1.5" />
+    <circle cx="50" cy="65" r="2" fill="#ff00ff" />
+  </g>
+</svg>

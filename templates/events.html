@@ -1,0 +1,187 @@
+{% extends 'layout.html' %}
+
+{% block title %}SPNK - Signal Events{% endblock %}
+
+{% block content %}
+<section class="events-hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                <h1 class="glitch-text mb-4" data-text="SIGNAL EVENTS">SIGNAL EVENTS</h1>
+                <p class="lead mb-5">Temporal manifestations of the Signal across our reality. Past transmissions and future breaches.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="countdown-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                <h2 class="glitch-text-small mb-4" data-text="NEXT SIGNAL DROPS IN:">NEXT SIGNAL DROPS IN:</h2>
+                <div class="main-countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="main-days">--</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="main-hours">--</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="main-minutes">--</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="main-seconds">--</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                <div class="countdown-title mt-3">
+                    <h3>GLX-777 Reality Breach #2</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="timeline-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="section-header text-center mb-5">
+                    <h2 class="glitch-text" data-text="EVENT TIMELINE">EVENT TIMELINE</h2>
+                </div>
+                <div class="timeline">
+                    {% for event in event_timeline %}
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">{{ event.date }}</div>
+                            <h3 class="timeline-title glitch-text-small" data-text="{{ event.title }}">{{ event.title }}</h3>
+                            <p class="timeline-description">{{ event.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="timeline-item future">
+                        <div class="timeline-marker pulse"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">IMMINENT</div>
+                            <h3 class="timeline-title glitch-text-small" data-text="??? CLASSIFIED ???">??? CLASSIFIED ???</h3>
+                            <p class="timeline-description">Signal transmission pending. Prepare your receptors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="upcoming-events py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="section-header text-center mb-4">
+                    <h2 class="glitch-text" data-text="UPCOMING TRANSMISSIONS">UPCOMING TRANSMISSIONS</h2>
+                </div>
+                <div class="events-grid">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="event-card">
+                                <div class="event-image">
+                                    <div class="event-date">
+                                        <span class="day">12</span>
+                                        <span class="month">JUN</span>
+                                    </div>
+                                </div>
+                                <div class="event-details">
+                                    <h3 class="event-title">Telegram AMA Session</h3>
+                                    <div class="event-meta">
+                                        <span><i class="fas fa-clock"></i> 20:00 UTC</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> Telegram</span>
+                                    </div>
+                                    <p class="event-description">Live Q&A with the SPNK development team. Submit questions about the Signal.</p>
+                                    <a href="https://t.me/OfficialSPNK" target="_blank" class="btn btn-outline-neon btn-sm mt-2">
+                                        <span class="btn-text">Set Reminder</span>
+                                        <i class="fas fa-bell ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="event-card">
+                                <div class="event-image">
+                                    <div class="event-date">
+                                        <span class="day">30</span>
+                                        <span class="month">JUN</span>
+                                    </div>
+                                </div>
+                                <div class="event-details">
+                                    <h3 class="event-title">NFT Showcase</h3>
+                                    <div class="event-meta">
+                                        <span><i class="fas fa-clock"></i> 18:00 UTC</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> Discord</span>
+                                    </div>
+                                    <p class="event-description">First reveal of the complete NFT collection. Witness the manifestation of the Signal's avatars.</p>
+                                    <a href="#" class="btn btn-outline-neon btn-sm mt-2">
+                                        <span class="btn-text">Coming Soon</span>
+                                        <i class="fas fa-lock ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="embed-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="embed-container">
+                    <div class="section-header text-center mb-4">
+                        <h2 class="glitch-text" data-text="TELEGRAM SIGNAL FEED">TELEGRAM SIGNAL FEED</h2>
+                    </div>
+                    <div class="telegram-embed">
+                        <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-post="OfficialSPNK/1" data-width="100%"></script>
+                        <div class="embed-glitch-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/countdown.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add entry animation
+        setTimeout(() => {
+            document.querySelector('.events-hero-section').classList.add('active');
+        }, 300);
+        
+        // Initialize main countdown
+        initCountdown('2024-06-30T00:00:00', 'main-days', 'main-hours', 'main-minutes', 'main-seconds');
+        
+        // Animate timeline on scroll
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        timelineItems.forEach(item => {
+            observer.observe(item);
+        });
+    });
+</script>
+{% endblock %}

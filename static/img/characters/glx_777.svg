@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400">
+  <style>
+    .bg { fill: #0a0a0a; }
+    .outline { fill: none; stroke: #ff00ff; stroke-width: 1.5; }
+    .secondary { fill: none; stroke: #00ffff; stroke-width: 1; }
+    .fill-glow { fill: #ff00ff; filter: drop-shadow(0 0 3px #ff00ff); }
+    .glitch-anim { animation: glitch 4s infinite alternate; }
+    .flicker { animation: flicker 3s infinite; }
+    
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, 3px); }
+      40% { transform: translate(-3px, -3px); }
+      60% { transform: translate(3px, 3px); }
+      80% { transform: translate(3px, -3px); }
+      100% { transform: translate(0); }
+    }
+    
+    @keyframes flicker {
+      0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 1;
+      }
+      20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.4;
+      }
+    }
+  </style>
+
+  <!-- Background -->
+  <rect class="bg" x="0" y="0" width="300" height="400" />
+  
+  <!-- Signal pattern background -->
+  <g opacity="0.2">
+    <path d="M0,200 H300 M150,0 V400" stroke="#00ffff" stroke-width="0.5" />
+    <path d="M20,20 H280 V380 H20 Z" stroke="#ff00ff" stroke-width="0.5" fill="none" />
+    <path d="M75,100 H225 V300 H75 Z" stroke="#ff00ff" stroke-width="0.5" fill="none" />
+    
+    <!-- Signal waves -->
+    <path d="M50,200 C75,180 100,220 125,200 C150,180 175,220 200,200 C225,180 250,220 275,200" stroke="#00ffff" stroke-width="0.5" fill="none" />
+    <path d="M50,220 C75,200 100,240 125,220 C150,200 175,240 200,220 C225,200 250,240 275,220" stroke="#00ffff" stroke-width="0.5" fill="none" />
+  </g>
+  
+  <!-- Character: GLX-777 "The Signal" -->
+  <g class="glitch-anim">
+    <!-- Abstract figure -->
+    <path class="outline" d="M150,80 C190,80 210,120 210,160 C210,200 190,240 150,260 C110,240 90,200 90,160 C90,120 110,80 150,80 Z" />
+    
+    <!-- Signal/data nodes -->
+    <circle class="fill-glow flicker" cx="150" cy="120" r="10" />
+    <circle class="fill-glow" cx="110" cy="160" r="8" />
+    <circle class="fill-glow" cx="190" cy="160" r="8" />
+    <circle class="fill-glow flicker" cx="150" cy="200" r="10" />
+    
+    <!-- Connection lines -->
+    <path class="secondary" d="M150,120 L110,160 L150,200 L190,160 Z" />
+    <path class="secondary" d="M150,120 L150,200" />
+    <path class="secondary" d="M110,160 L190,160" />
+    
+    <!-- Signal waves emanating -->
+    <path class="secondary" d="M150,80 C180,50 220,50 250,80" />
+    <path class="secondary" d="M150,80 C120,50 80,50 50,80" />
+    
+    <!-- Lower body / signal transmission -->
+    <path class="outline" d="M150,260 C180,260 200,280 200,320" />
+    <path class="outline" d="M150,260 C120,260 100,280 100,320" />
+    
+    <!-- Flesh protocol representation -->
+    <path class="secondary" d="M130,220 C140,235 160,235 170,220" />
+    <path class="secondary" d="M130,240 C140,255 160,255 170,240" />
+  </g>
+  
+  <!-- Character identifier -->
+  <g transform="translate(0, 340)">
+    <rect x="90" y="0" width="120" height="30" fill="rgba(0,0,0,0.7)" />
+    <text x="150" y="20" font-family="'Courier New', monospace" font-size="18" fill="#00ffff" text-anchor="middle">GLX-777</text>
+  </g>
+</svg>
