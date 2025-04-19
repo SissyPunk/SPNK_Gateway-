@@ -9,7 +9,6 @@ deploymentTarget = "autoscale"
 run = ["sh", "-c", "python -m http.server 5000"]
 
 [workflows]
-runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
