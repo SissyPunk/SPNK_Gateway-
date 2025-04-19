@@ -1,0 +1,83 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}Convert Image - SPNK Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-4">Convert Image to Optimized Signal Format</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Select Image File (PNG, JPG)</label>
+                            <input type="file" class="form-control" id="image" name="image" accept=".png,.jpg,.jpeg" required>
+                            <div class="form-text">Maximum file size: 16MB</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="conversion_type" class="form-label">Conversion Type</label>
+                            <select class="form-select" id="conversion_type" name="conversion_type">
+                                <option value="png" selected>PNG with Glitch Effects</option>
+                                <option value="svg">SVG with Embedded Glitch Effects</option>
+                            </select>
+                            <div class="form-text">
+                                PNG: Better for detailed images. SVG: Better for simple images, logos, etc.
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3" id="glitch_intensity_container">
+                            <label for="glitch_intensity" class="form-label">Glitch Intensity</label>
+                            <input type="range" class="form-range" id="glitch_intensity" name="glitch_intensity" min="0.1" max="1.0" step="0.1" value="0.5">
+                            <div class="d-flex justify-content-between">
+                                <span>Subtle</span>
+                                <span>Medium</span>
+                                <span>Strong</span>
+                            </div>
+                            <div class="form-text">
+                                Controls how strong the glitch effect will be applied to the image.
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-bolt me-2"></i>Process Signal Image
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <div class="alert alert-info">
+                    <h5 class="alert-heading"><i class="fas fa-info-circle me-2"></i>Signal Image Processing</h5>
+                    <p>
+                        The Signal Processing algorithm applies various glitch and cyberpunk effects to your images, 
+                        transforming them into optimized signal formats compatible with the SPNK ecosystem.
+                    </p>
+                    <hr>
+                    <p class="mb-0">
+                        <strong>Processing includes:</strong> Cyberpunk color shifts, digital glitch effects, 
+                        scanline overlays, and signal noise - all optimized for the Signal protocol.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dynamically show/hide glitch intensity based on conversion type
+    document.getElementById('conversion_type').addEventListener('change', function() {
+        const intensityContainer = document.getElementById('glitch_intensity_container');
+        if (this.value === 'svg') {
+            intensityContainer.style.display = 'none';
+        } else {
+            intensityContainer.style.display = 'block';
+        }
+    });
+</script>
+{% endblock %}

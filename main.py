@@ -1,11 +1,14 @@
 import os
 import shutil
-from flask import Flask, render_template, url_for, request, redirect, flash, jsonify, session
+import uuid
+from flask import Flask, render_template, url_for, request, redirect, flash, jsonify, session, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_wtf.csrf import CSRFProtect
+from werkzeug.utils import secure_filename
 import logging
 from models import db, Character, NFT, Event, User
+from utils.image_processor import convert_png_to_signal_image, convert_png_to_signal_svg
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -21,6 +24,11 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     "pool_pre_ping": True,
 }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Configure file uploads
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload size
+app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg'}
 
 # Initialize extensions
 db.init_app(app)
@@ -330,6 +338,119 @@ def delete_nft(id):
     
     flash('NFT deleted successfully', 'success')
     return redirect(url_for('admin_nfts'))
+
+# Helper function for file uploads
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+# Image conversion routes
+@app.route('/admin/convert-image', methods=['GET', 'POST'])
+@login_required
+def convert_image():
+    if not current_user.is_admin:
+        flash('Access denied: Admin privileges required', 'error')
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        # Check if the post request has the file part
+        if 'image' not in request.files:
+            flash('No file part', 'danger')
+            return redirect(request.url)
+        
+        file = request.files['image']
+        # If user does not select file, browser submits an empty part without filename
+        if file.filename == '':
+            flash('No selected file', 'danger')
+            return redirect(request.url)
+        
+        if file and allowed_file(file.filename):
+            # Create a secure filename with UUID to prevent conflicts
+            original_filename = secure_filename(file.filename)
+            filename_base, file_extension = os.path.splitext(original_filename)
+            unique_filename = f"{filename_base}_{uuid.uuid4().hex}{file_extension}"
+            
+            # Save the uploaded file
+            upload_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+            file.save(upload_path)
+            
+            # Generate different output paths based on conversion type
+            conversion_type = request.form.get('conversion_type', 'png')
+            glitch_intensity = float(request.form.get('glitch_intensity', 0.5))
+            
+            if conversion_type == 'svg':
+                # Convert to SVG (with embedded image and effects)
+                output_filename = f"{filename_base}_{uuid.uuid4().hex}.svg"
+                output_path = os.path.join(app.config['UPLOAD_FOLDER'], output_filename)
+                
+                if convert_png_to_signal_svg(upload_path, output_path):
+                    return redirect(url_for('display_converted_image', filename=output_filename))
+                else:
+                    flash('Error during SVG conversion', 'danger')
+                    return redirect(request.url)
+            else:
+                # Convert to processed PNG
+                output_filename = f"{filename_base}_{uuid.uuid4().hex}_signal.png"
+                output_path = os.path.join(app.config['UPLOAD_FOLDER'], output_filename)
+                
+                if convert_png_to_signal_image(upload_path, output_path, glitch_intensity=glitch_intensity):
+                    return redirect(url_for('display_converted_image', filename=output_filename))
+                else:
+                    flash('Error during image conversion', 'danger')
+                    return redirect(request.url)
+    
+    return render_template('admin/convert_image.html')
+
+@app.route('/admin/converted/<filename>')
+@login_required
+def display_converted_image(filename):
+    if not current_user.is_admin:
+        flash('Access denied: Admin privileges required', 'error')
+        return redirect(url_for('index'))
+    
+    return render_template('admin/converted_image.html', filename=filename)
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+@app.route('/admin/convert-to-nft/<filename>')
+@login_required
+def convert_to_nft(filename):
+    if not current_user.is_admin:
+        flash('Access denied: Admin privileges required', 'error')
+        return redirect(url_for('index'))
+    
+    # Determine if it's an SVG or PNG
+    is_svg = filename.lower().endswith('.svg')
+    
+    # Generate a unique NFT ID
+    nft_id = f"sig_{uuid.uuid4().hex[:8]}"
+    
+    # Path to the source file and destination in the NFT folder
+    source_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    dest_path = os.path.join(app.static_folder, 'img', 'nfts', f"{nft_id}.svg")
+    
+    if is_svg:
+        # If already SVG, just copy it to the NFT folder
+        try:
+            shutil.copy2(source_path, dest_path)
+            flash(f'Converted to NFT with ID: {nft_id}. Now you can create an NFT with this ID.', 'success')
+        except Exception as e:
+            logging.error(f"Error copying SVG to NFT folder: {str(e)}")
+            flash('Error creating NFT file', 'danger')
+        
+        return redirect(url_for('new_nft', suggested_id=nft_id))
+    else:
+        # If PNG, first convert to SVG, then move it
+        try:
+            # Convert to SVG
+            convert_png_to_signal_svg(source_path, dest_path)
+            flash(f'Converted to NFT with ID: {nft_id}. Now you can create an NFT with this ID.', 'success')
+        except Exception as e:
+            logging.error(f"Error converting PNG to SVG for NFT: {str(e)}")
+            flash('Error creating NFT file', 'danger')
+            
+        return redirect(url_for('new_nft', suggested_id=nft_id))
 
 # API routes for AJAX requests
 @app.route('/api/nfts')
