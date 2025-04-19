@@ -1,0 +1,151 @@
+/*---------------------------------------
+ * SPNK - Admin Panel Stylesheet
+ *---------------------------------------*/
+
+.admin-background {
+    background-color: var(--bg-darker);
+    color: var(--text-primary);
+}
+
+.admin-navbar {
+    background-color: rgba(5, 5, 5, 0.9);
+    border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+}
+
+.admin-content {
+    min-height: calc(100vh - 136px);
+}
+
+.admin-footer {
+    background-color: rgba(5, 5, 5, 0.8);
+    border-top: 1px solid rgba(255, 0, 255, 0.1);
+}
+
+/* Cards */
+.admin-card {
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.admin-card .card-header {
+    background-color: rgba(10, 10, 10, 0.8);
+    border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--neon-pink);
+}
+
+/* Tables */
+.table {
+    color: var(--text-primary);
+    border-color: rgba(255, 0, 255, 0.2);
+}
+
+.table th {
+    border-top: none;
+    border-bottom: 2px solid rgba(255, 0, 255, 0.3);
+    font-weight: 600;
+}
+
+.table td {
+    border-color: rgba(255, 0, 255, 0.1);
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 0, 255, 0.05);
+}
+
+/* Forms */
+.form-control, .form-select {
+    background-color: rgba(5, 5, 5, 0.7);
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    color: var(--text-primary);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(5, 5, 5, 0.9);
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 255, 0.25);
+    color: var(--text-primary);
+}
+
+.form-label {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.form-check-input {
+    background-color: rgba(5, 5, 5, 0.7);
+    border-color: rgba(255, 0, 255, 0.3);
+}
+
+.form-check-input:checked {
+    background-color: var(--neon-pink);
+    border-color: var(--neon-pink);
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 1.5rem;
+}
+
+.page-link {
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    color: var(--text-primary);
+}
+
+.page-link:hover {
+    background-color: rgba(255, 0, 255, 0.1);
+    border-color: rgba(255, 0, 255, 0.3);
+    color: var(--neon-pink);
+}
+
+.page-item.active .page-link {
+    background-color: var(--neon-pink);
+    border-color: var(--neon-pink);
+    color: var(--bg-darker);
+}
+
+.page-item.disabled .page-link {
+    background-color: rgba(10, 10, 10, 0.5);
+    border-color: rgba(255, 0, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Alerts */
+.alert {
+    border-radius: 0;
+    border: none;
+}
+
+.alert-success {
+    background-color: rgba(0, 255, 127, 0.2);
+    color: #00ff7f;
+    border-left: 4px solid #00ff7f;
+}
+
+.alert-danger {
+    background-color: rgba(255, 0, 127, 0.2);
+    color: #ff007f;
+    border-left: 4px solid #ff007f;
+}
+
+.alert-info {
+    background-color: rgba(0, 255, 255, 0.2);
+    color: #00ffff;
+    border-left: 4px solid #00ffff;
+}
+
+/* Utils */
+code {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--neon-blue);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+}

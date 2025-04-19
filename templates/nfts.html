@@ -17,7 +17,7 @@
 <section class="nft-gallery py-5">
     <div class="container">
         <div class="row g-4">
-            {% for nft in nft_collection %}
+            {% for nft in nft_collection.items %}
             <div class="col-md-6 col-lg-4">
                 <div class="nft-card">
                     <div class="nft-image-container">
@@ -31,13 +31,13 @@
                         <h3 class="nft-name glitch-text-small" data-text="{{ nft.name }}">{{ nft.name }}</h3>
                         <p class="nft-description">{{ nft.description }}</p>
                         <div class="nft-meta">
-                            <div class="nft-edition">Edition 1 of 777</div>
-                            <div class="nft-rarity">Signal Strength: Prototype</div>
+                            <div class="nft-edition">{{ nft.edition }}</div>
+                            <div class="nft-rarity">{{ nft.rarity }}</div>
                         </div>
                         <div class="nft-actions">
-                            <button class="btn btn-outline-neon btn-sm disabled">
-                                <span class="btn-text">Mint Soon</span>
-                                <i class="fas fa-lock ms-2"></i>
+                            <button class="btn btn-outline-neon btn-sm {% if nft.status != 'Available' %}disabled{% endif %}">
+                                <span class="btn-text">{% if nft.status == 'Available' %}Mint Now{% else %}Mint Soon{% endif %}</span>
+                                {% if nft.status != 'Available' %}<i class="fas fa-lock ms-2"></i>{% endif %}
                             </button>
                             <button class="btn btn-sm btn-secondary">
                                 <i class="fas fa-info-circle"></i>
@@ -48,6 +48,57 @@
             </div>
             {% endfor %}
         </div>
+        
+        <!-- Pagination -->
+        {% if nft_collection.pages > 1 %}
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="NFT Gallery Pagination">
+                <ul class="pagination">
+                    {% if nft_collection.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('nfts', page=nft_collection.prev_num) }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&laquo;</span>
+                    </li>
+                    {% endif %}
+                    
+                    {% for page_num in nft_collection.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                        {% if page_num %}
+                            {% if page_num == nft_collection.page %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ page_num }}</span>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('nfts', page=page_num) }}">{{ page_num }}</a>
+                            </li>
+                            {% endif %}
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">…</span>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if nft_collection.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('nfts', page=nft_collection.next_num) }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&raquo;</span>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
     </div>
 </section>
 

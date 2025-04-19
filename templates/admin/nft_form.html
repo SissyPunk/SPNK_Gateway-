@@ -1,0 +1,98 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}SPNK Admin - {% if nft %}Edit NFT{% else %}Add New NFT{% endif %}{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h1 class="glitch-text-small" data-text="{% if nft %}Edit NFT{% else %}Add New NFT{% endif %}">{% if nft %}Edit NFT{% else %}Add New NFT{% endif %}</h1>
+</div>
+
+<div class="card admin-card">
+    <div class="card-body">
+        <form method="POST" action="{% if nft %}{{ url_for('edit_nft', id=nft.id) }}{% else %}{{ url_for('new_nft') }}{% endif %}">
+            <div class="row g-3">
+                {% if not nft %}
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="id" class="form-label">NFT ID (used for SVG file name)</label>
+                        <input type="text" class="form-control" id="id" name="id" required placeholder="e.g., new_nft_001">
+                        <small class="form-text text-muted">This will be used as the filename for the SVG image (new_nft_001.svg)</small>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="name" class="form-label">NFT Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required value="{{ nft.name if nft else '' }}" placeholder="e.g., NEW-001">
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="Coming Soon" {% if nft and nft.status == 'Coming Soon' %}selected{% endif %}>Coming Soon</option>
+                            <option value="Available" {% if nft and nft.status == 'Available' %}selected{% endif %}>Available</option>
+                            <option value="Sold Out" {% if nft and nft.status == 'Sold Out' %}selected{% endif %}>Sold Out</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="form-group mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required>{{ nft.description if nft else '' }}</textarea>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="edition" class="form-label">Edition</label>
+                        <input type="text" class="form-control" id="edition" name="edition" value="{{ nft.edition if nft else 'Edition 1 of 777' }}">
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="rarity" class="form-label">Rarity</label>
+                        <input type="text" class="form-control" id="rarity" name="rarity" value="{{ nft.rarity if nft else 'Signal Strength: Prototype' }}">
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="featured" name="featured" value="1" {% if nft and nft.featured %}checked{% endif %}>
+                        <label class="form-check-label" for="featured">Featured NFT</label>
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('admin_nfts') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-outline-neon">
+                            <i class="fas fa-save me-2"></i> {% if nft %}Update{% else %}Create{% endif %} NFT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if not nft %}
+<div class="card admin-card mt-4">
+    <div class="card-header">
+        <h5 class="mb-0">Important Note</h5>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-info mb-0">
+            <i class="fas fa-info-circle me-2"></i> After creating the NFT, don't forget to add the corresponding SVG file to the <code>/static/img/nfts/</code> directory with the same ID as the NFT.
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
