@@ -1,7 +1,8 @@
 import os
-from flask import Flask, render_template, url_for, request, redirect, flash, jsonify
+from flask import Flask, render_template, url_for, request, redirect, flash, jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from flask_wtf.csrf import CSRFProtect
 import logging
 from models import db, Character, NFT, Event, User
 
@@ -25,6 +26,9 @@ db.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+# Initialize CSRF protection
+csrf = CSRFProtect(app)
 
 # Setup Flask-Login
 @login_manager.user_loader

@@ -61,6 +61,19 @@
                             <span class="nav-text" data-text="EVENTS">EVENTS</span>
                         </a>
                     </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-neon btn-sm ms-2" href="{{ url_for('admin_dashboard') }}">
+                            <i class="fas fa-lock me-1"></i> Admin
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-neon btn-sm ms-2" href="{{ url_for('login') }}">
+                            <i class="fas fa-lock me-1"></i> Admin Login
+                        </a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
