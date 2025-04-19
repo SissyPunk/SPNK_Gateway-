@@ -17,8 +17,8 @@ logging.basicConfig(level=logging.DEBUG)
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "spnk_development_key")
-"pool_recycle":300,
-"pool_pre_ping":True,
+# "pool_recycle":300,
+# "pool_pre_ping":True,
 # Configure file uploads
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload size
