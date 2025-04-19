@@ -1,4 +1,5 @@
 import os
+import shutil
 from flask import Flask, render_template, url_for, request, redirect, flash, jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -260,8 +261,9 @@ def new_nft():
         return redirect(url_for('index'))
     
     if request.method == 'POST':
+        nft_id = request.form.get('id')
         nft = NFT(
-            id=request.form.get('id'),
+            id=nft_id,
             name=request.form.get('name'),
             status=request.form.get('status'),
             description=request.form.get('description'),
@@ -273,7 +275,20 @@ def new_nft():
         db.session.add(nft)
         db.session.commit()
         
-        flash('NFT added successfully', 'success')
+        # Create an SVG file for the new NFT by copying the template
+        try:
+            template_path = os.path.join(app.static_folder, 'img', 'nfts', 'template_nft.svg')
+            new_svg_path = os.path.join(app.static_folder, 'img', 'nfts', f"{nft_id}.svg")
+            
+            if os.path.exists(template_path) and not os.path.exists(new_svg_path):
+                shutil.copy2(template_path, new_svg_path)
+                flash('NFT added successfully with template image', 'success')
+            else:
+                flash('NFT added successfully. Don\'t forget to add an SVG image with the same ID', 'success')
+        except Exception as e:
+            logging.error(f"Error creating NFT image: {str(e)}")
+            flash('NFT added successfully, but there was an error creating the SVG image', 'warning')
+            
         return redirect(url_for('admin_nfts'))
     
     return render_template('admin/nft_form.html', nft=None)
